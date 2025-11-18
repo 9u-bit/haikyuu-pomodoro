@@ -10,7 +10,7 @@ const muteBtn = document.getElementById("mute-btn");
 // Audio
 // let bgMusic = new Audio("url");
 // bgMusic.loop = true;
-let endSound = new Audio ("/assets/audio/comm_break.mp3");
+let endSound = new Audio ("assets/audio/comm_break.mp3");
 
 let timer;
 let isRunning = false;
