@@ -15,6 +15,7 @@ let endSound = new Audio ("assets/audio/comm_break.mp3");
 let timer;
 let isRunning = false;
 let isWorkPhase = true;
+let isBreak = false;
 let currentSet = 1;
 let totalSets = parseInt(setsInput.value);
 
@@ -24,15 +25,27 @@ let seconds = 0;
 
 // Update display
 function updateDisplay() {
-    document.getElementById("set-indicator").textContent = `Set ${currentSet} of ${totalSets}`;
+    document.getElementById("set-indicator").textContent = "Set " + currentSet + " of " + totalSets;
     minutesDisplay.textContent = String(minutes).padStart(2, "0");
     secondsDisplay.textContent = String(seconds).padStart(2, "0");
+
+    const phaseIndicator = document.getElementById("phase-indicator");
+    if (!isRunning && currentSet > totalSets) {
+        phaseIndicator.textContent = ""; // 🎉 Well done! You finished all sets! NOTE: I DONT LIKE THIS HERE :C
+    } else if (isBreak) {
+        phaseIndicator.textContent = "";
+    } 
+    else {
+        phaseIndicator.textContent = isWorkPhase ? "Work Time" : "Rest Time";
+    }
 }
+
 
 // Start timer
 function startTimer() {
     if (isRunning) return;
     isRunning = true;
+
     totalSets = parseInt(setsInput.value);
     //bgMusic.play();
 
@@ -41,21 +54,31 @@ function startTimer() {
             if (minutes === 0) {
                 clearInterval(timer);
                 endSound.play();
-                currentSet++;
+                // currentSet++;
 
-                if (currentSet > totalSets) {
-                    isRunning = false;
-                    return;
-                }
-
+                // Switch phase
                 isWorkPhase = !isWorkPhase;
+
+                // Increment only after finishing work phase
+                if (isWorkPhase) {
+                    currentSet++;
+                    if(currentSet > totalSets) {
+                        isRunning = false;
+                        updateDisplay();
+                        return;
+                    }
+                }
+                
                 minutes = isWorkPhase
                     ? parseInt(workInput.value)
                     : parseInt(restInput.value);
                 seconds = 0;
                 //startTimer();
                 isRunning = false;
-                setTimeout(() => startTimer(), 6000);
+                setTimeout(() => {
+                    isBreak = false;
+                    startTimer();
+                }, 6000);
                 return;
             }
             minutes--;

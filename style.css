@@ -33,12 +33,14 @@ body {
     font-size: 1.2rem;
     opacity: 0.3;
     margin: 0;
+    font-weight: 100;
 }
 
 .sign {
     font-size: 0.6rem;
     opacity: 0.3;
     margin: 0.2rem 0;
+    font-weight: 100;
 }
 
 .center-section {
@@ -46,6 +48,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.indicator {
+    font-size: 1.5rem;
+    font-weight: 100;
+    opacity: 0.6;
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 .timer-display {
@@ -74,6 +84,8 @@ body {
 }
 
 .controls button {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 100;
     font-size: 1rem;
     margin: 0 1rem;
     padding: 0.5rem 1.5rem;
@@ -103,10 +115,4 @@ body {
 .mute-btn:hover {
     background: rgba(0, 0, 0, 0.7);
     transform: scale(1.1);
-}
-
-.set-indicator {
-    font-size: 1.2rem;
-    opacity: 0.6;
-    margin-top: 1rem;
 }
