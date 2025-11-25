@@ -31,7 +31,7 @@ function updateDisplay() {
 
     const phaseIndicator = document.getElementById("phase-indicator");
     if (!isRunning && currentSet > totalSets) {
-        phaseIndicator.textContent = ""; // 🎉 Well done! You finished all sets! NOTE: I DONT LIKE THIS HERE :C
+        // phaseIndicator.textContent = ""; // 🎉 Well done! You finished all sets! NOTE: I DONT LIKE THIS HERE :C
     } else if (isBreak) {
         phaseIndicator.textContent = "";
     } 
@@ -40,13 +40,21 @@ function updateDisplay() {
     }
 }
 
+function initTimer() {
+    totalSets = parseInt(setsInput.value);
+    minutes = parseInt(workInput.value);
+    seconds = 0;
+    currentSet = 1;
+    isWorkPhase = true;
+    isBreak = false;
+    updateDisplay();
+}
 
 // Start timer
 function startTimer() {
     if (isRunning) return;
     isRunning = true;
 
-    totalSets = parseInt(setsInput.value);
     //bgMusic.play();
 
     timer = setInterval(() => {
@@ -112,7 +120,12 @@ muteBtn.addEventListener("click", () => {
 */
 
 // Button listeners
-startBtn.addEventListener("click", startTimer);
+startBtn.addEventListener("click", () => {
+    if(!isRunning) {
+        initTimer();
+        startTimer();
+    }
+})
 resetBtn.addEventListener("click", resetTimer);
 
 // Initial display
