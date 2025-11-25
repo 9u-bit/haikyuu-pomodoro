@@ -6,6 +6,7 @@ const setsInput = document.getElementById("sets");
 const startBtn = document.getElementById("start-btn");
 const resetBtn = document.getElementById("reset-btn");
 const muteBtn = document.getElementById("mute-btn");
+const clockDisplay = document.getElementById("clock");
 
 // Audio
 // let bgMusic = new Audio("url");
@@ -39,6 +40,22 @@ function updateDisplay() {
         phaseIndicator.textContent = isWorkPhase ? "Work Time" : "Rest Time";
     }
 }
+
+function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let ampm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 becomes 12
+    
+    const formattedTime = String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + " " + ampm;
+    clockDisplay.textContent = formattedTime;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
 
 function initTimer() {
     totalSets = parseInt(setsInput.value);

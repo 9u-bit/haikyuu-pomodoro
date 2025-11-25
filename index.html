@@ -11,16 +11,23 @@
     <main class="container">
         <div class="top-section">
             <h1 class="title"> Haikyuu !! Pomodoro 🏐 </h1>
-            <h3 class="sign"> By Ponkan9u </h3>
+            <h3 class="sign"> B y  P o n k a n 9 u </h3>
         </div>
         
      <div class="center-section">
+        <!-- Click Display -->
+         <div class="clock-display" id="clock"></div>
         <!-- Timer Display -->
-        <div class="indicator" id="phase-indicator"> Work Time</div>
-        <div class="timer-display">
-            <span id="minutes"> 25</span> : <span id="seconds">00 </span>
-        </div>
-        <div class="indicator" id="set-indicator"> Set 1 of 4</div>
+         <div class="timer-row">
+            <div class="indicator" id="phase-indicator"> Work Time</div>
+            <div class="timer-display">
+                <!-- <span id="minutes"> 25</span> : <span id="seconds">00 </span> -->
+                <span class="time-box" id="minutes">25</span>
+                <span class="colon">:</span>
+                <span class="time-box" id="seconds">00</span>
+            </div>
+            <div class="indicator" id="set-indicator"> Set 1 of 4</div>
+         </div>
      </div>
      
       <div class="bottom-section">
