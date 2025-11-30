@@ -145,5 +145,23 @@ startBtn.addEventListener("click", () => {
 })
 resetBtn.addEventListener("click", resetTimer);
 
+// Clickable timer and clock
+
+let swapMode = false;
+
+clockDisplay.addEventListener("click", () => {
+    if(!swapMode) {
+        document.body.classList.add("swap-mode");
+        swapMode = true;
+    }
+});
+
+document.querySelector(".timer-display").addEventListener("click", () => {
+    if(swapMode) {
+        document.body.classList.remove("swap-mode");
+        swapMode = false;
+    }
+});
+
 // Initial display
 updateDisplay();

@@ -144,3 +144,31 @@ body {
     background: rgba(0, 0, 0, 0.7);
     transform: scale(1.1);
 }
+
+/* Clickable timer and clock */
+
+.swap-mode .timer-row {
+    order: 1;
+}
+
+.swap-mode .clock-display{
+    order: 2;
+    font-size: 14rem;
+    animation: pulse 1s infinite;
+    font-weight: bolder;
+    opacity: 1;
+    width: 7ch;
+    text-align: center;
+}
+
+.swap-mode .timer-display {
+    font-size: 2rem;
+    font-weight: 100;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+}
+
+.swap-mode .bottom-section,
+.swap-mode .indicator {
+    display: none;
+}
