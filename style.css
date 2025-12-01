@@ -7,10 +7,11 @@ body {
     color: whitesmoke;
     background: url('assets/images/bg.jpg') no-repeat center center fixed;
     background-size: cover;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .container {
@@ -18,7 +19,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     text-align: center;
     padding: 2rem 0;
@@ -30,14 +31,14 @@ body {
 }
 
 .title {
-    font-size: 1.2rem;
+    font-size: 1.2vw;
     opacity: 0.3;
     margin: 0;
     font-weight: 100;
 }
 
 .sign {
-    font-size: 0.6rem;
+    font-size: 0.6vw;
     opacity: 0.3;
     margin: 0.2rem 0;
     font-weight: 100;
@@ -52,7 +53,7 @@ body {
 }
 
 .clock-display {
-    font-size: 2rem;
+    font-size: 2vw;
     font-weight: 100;
     opacity: 0.6;
     margin-bottom: 1rem;
@@ -63,13 +64,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .timer-display {
-    font-size: 14rem;
+    font-size: 14vw;
     animation: pulse 1s infinite;
     font-weight: bolder;
-    width: 6ch;
+    width: auto;
     text-align: center;
 }
 
@@ -85,7 +87,7 @@ body {
 }
 
 .indicator {
-    font-size: 1.5rem;
+    font-size: 1.5vw;
     font-weight: 100;
     opacity: 0.6;
     /*margin-right: 1rem;
@@ -101,6 +103,7 @@ body {
     justify-content: center;
     gap: 2rem;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
 }
 
 .setting-group {
@@ -114,7 +117,7 @@ body {
 .controls button {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: 100;
-    font-size: 1rem;
+    font-size: 1vw;
     margin: 0 1rem;
     padding: 0.5rem 1.5rem;
     border: none;
@@ -153,7 +156,7 @@ body {
 
 .swap-mode .clock-display{
     order: 2;
-    font-size: 14rem;
+    font-size: 14vw;
     animation: pulse 1s infinite;
     font-weight: bolder;
     opacity: 1;
@@ -162,7 +165,7 @@ body {
 }
 
 .swap-mode .timer-display {
-    font-size: 2rem;
+    font-size: 2vw;
     font-weight: 100;
     opacity: 0.6;
     margin-bottom: 1rem;
@@ -171,4 +174,37 @@ body {
 .swap-mode .bottom-section,
 .swap-mode .indicator {
     display: none;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .timer-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .indicator {
+        font-size: 1.2vw;
+    }
+
+    .controls button {
+        font-size: 1vw;
+        padding: 0.4rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timer-display {
+        font-size: 8vw;
+    }
+
+    .clock-display {
+        font-size: 6vw;
+    }
+
+    .settings {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
