@@ -1,3 +1,10 @@
+// YT IFrame API (for Music Player)
+let tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+let firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+let player; // Global player object
+
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const workInput = document.getElementById("work-time");
@@ -7,6 +14,11 @@ const startBtn = document.getElementById("start-btn");
 const resetBtn = document.getElementById("reset-btn");
 const muteBtn = document.getElementById("mute-btn");
 const clockDisplay = document.getElementById("clock");
+const loadBtn = document.getElementById("load-playlist-btn");
+const playlistInput = document.getElementById("playlist-link");
+const playerDisplay = document.getElementById("player-display");
+const playlistInputBox = document.getElementById("playlist-input");
+const resetPlayerBtn = document.getElementById("reset-player-btn");
 
 // Audio
 // let bgMusic = new Audio("url");
@@ -40,6 +52,24 @@ function updateDisplay() {
         phaseIndicator.textContent = isWorkPhase ? "Work Time" : "Rest Time";
     }
 }
+
+// Clickable timer and clock
+
+let swapMode = false;
+
+clockDisplay.addEventListener("click", () => {
+    if(!swapMode) {
+        document.body.classList.add("swap-mode");
+        swapMode = true;
+    }
+});
+
+document.querySelector(".timer-display").addEventListener("click", () => {
+    if(swapMode) {
+        document.body.classList.remove("swap-mode");
+        swapMode = false;
+    }
+});
 
 function updateClock() {
     const now = new Date();
@@ -145,23 +175,50 @@ startBtn.addEventListener("click", () => {
 })
 resetBtn.addEventListener("click", resetTimer);
 
-// Clickable timer and clock
-
-let swapMode = false;
-
-clockDisplay.addEventListener("click", () => {
-    if(!swapMode) {
-        document.body.classList.add("swap-mode");
-        swapMode = true;
+loadBtn.addEventListener("click", () => {
+    const link = playlistInput.value.trim();
+    if(link.includes("list=")) {
+        const playlistId = link.split("list=")[1];
+        if(player && typeof player.loadPlaylist === "function") {
+            player.loadPlaylist({list: playlistId});
+            playlistInputBox.style.display = "none";
+            playerDisplay.style.display = "block";
+            document.getElementById("playlist-name").textContent = "YouTube Playlist.";
+        } else {
+            alert("YouTube player not ready yet. Please wait a moment and try again.")
+        }
+    } else {
+        alert("Please enter a valid YouTube playlist link.")
     }
-});
+})
 
-document.querySelector(".timer-display").addEventListener("click", () => {
-    if(swapMode) {
-        document.body.classList.remove("swap-mode");
-        swapMode = false;
-    }
-});
+resetPlayerBtn("click", () => {
+
+})
+
+// YT functions (for Music Player)
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+        height: '200',
+        width: '100%',
+        playerVars: {
+            listType: 'playlist',
+            list: ''
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    })
+}
+
+function onPlayerReady(event) {
+    console.log("YouTube Player ready");
+}
+
+function onPlayerStateChange(event) {
+
+}
 
 // Initial display
 updateDisplay();

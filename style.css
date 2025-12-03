@@ -32,14 +32,14 @@ body {
 
 .title {
     font-size: 1.2vw;
-    opacity: 0.3;
+    opacity: 0.6;
     margin: 0;
     font-weight: 100;
 }
 
 .sign {
-    font-size: 0.6vw;
-    opacity: 0.3;
+    font-size: 0.8vw;
+    opacity: 0.6;
     margin: 0.2rem 0;
     font-weight: 100;
 }
@@ -57,6 +57,7 @@ body {
     font-weight: 100;
     opacity: 0.6;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 .timer-row {
@@ -156,7 +157,7 @@ body {
 
 .swap-mode .clock-display{
     order: 2;
-    font-size: 14vw;
+    font-size: 13vw;
     animation: pulse 1s infinite;
     font-weight: bolder;
     opacity: 1;
@@ -169,14 +170,79 @@ body {
     font-weight: 100;
     opacity: 0.6;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 .swap-mode .bottom-section,
 .swap-mode .indicator {
-    display: none;
+    opacity: 0;
 }
 
-/* Responsive */
+/* Music player */
+
+.music-player {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    padding: 1rem;
+    color: whitesmoke;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+.music-player input[type="text"] {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 100;
+    width: 70%;
+    padding: 0.3rem;
+    border-radius: 6px;
+    border: none;
+}
+
+.music-player button {
+    margin-left: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    border: none;
+    border-radius: 6px;
+    background-color: black;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 100;
+    color: whitesmoke;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+#volume-slider {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.song-list {
+    max-height: 100px;
+    overflow-y: auto;
+    margin: 0.5rem 0;
+}
+
+.song-list div {
+    padding: 0.3rem;
+    cursor: pointer;
+}
+
+.song-list div.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive NOTE: Will make this part better 🙏 */
 
 @media (max-width: 768px) {
     .timer-row {
