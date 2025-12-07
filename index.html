@@ -17,7 +17,6 @@
      <div class="center-section">
         <!-- Click Display -->
          <div class="clock-display" id="clock"></div>
-        <!-- Timer Display -->
          <div class="timer-row">
             <div class="indicator" id="phase-indicator"> Work Time</div>
             <div class="timer-display">
@@ -52,11 +51,22 @@
         <button id="start-btn"> Start </button>
         <button id="reset-btn"> Reset </button>
        </section>
-
        <!--<button class="mute-btn" id="mute-btn" title="Toggle Music"> 🔈 </button>-->
       </div>
       
       <!-- Music Player -->
+       <div class="music-player" id="music-player">
+        <div class="playlist-input" id="playlist-input">
+            <input type="text" id="playlist-link" placeholder="Please input the playlist link here...">
+            <button id="load-playlist-btn"> Load </button>
+        </div>
+        <div id="player-display" style="display: none;">
+            <div id="spotify-player"></div>
+            <button id="reset-player-btn"> Change playlist </button>
+        </div>
+    </div>
+
+       <!-- YOUTUBE:
        <div class="music-player" id="music-player">
         <div class="playlist-input" id="playlist-input">
             <input type="text" id="playlist-link" placeholder="Please input the playlist link here...">
@@ -77,6 +87,7 @@
             <button id="reset-player-btn"> Change playlist </button>
         </div>
        </div>
+       -->
        
     </main>
 </body>

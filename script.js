@@ -1,9 +1,9 @@
-// YT IFrame API (for Music Player)
-let tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-let firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-let player; // Global player object
+// // YT IFrame API (for Music Player)
+// let tag = document.createElement('script');
+// tag.src = "https://www.youtube.com/iframe_api";
+// let firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// let player; // Global player object
 
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
@@ -19,6 +19,7 @@ const playlistInput = document.getElementById("playlist-link");
 const playerDisplay = document.getElementById("player-display");
 const playlistInputBox = document.getElementById("playlist-input");
 const resetPlayerBtn = document.getElementById("reset-player-btn");
+const spotifyPlayer = document.getElementById("spotify-player");
 
 // Audio
 // let bgMusic = new Audio("url");
@@ -176,49 +177,54 @@ startBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", resetTimer);
 
 loadBtn.addEventListener("click", () => {
-    const link = playlistInput.value.trim();
-    if(link.includes("list=")) {
-        const playlistId = link.split("list=")[1];
-        if(player && typeof player.loadPlaylist === "function") {
-            player.loadPlaylist({list: playlistId});
-            playlistInputBox.style.display = "none";
-            playerDisplay.style.display = "block";
-            document.getElementById("playlist-name").textContent = "YouTube Playlist.";
-        } else {
-            alert("YouTube player not ready yet. Please wait a moment and try again.")
-        }
-    } else {
-        alert("Please enter a valid YouTube playlist link.")
-    }
-})
+  const link = playlistInput.value.trim();
 
-resetPlayerBtn("click", () => {
+  if (link.includes("spotify.com")) {
+    const embedLink = link.replace("open.spotify.com", "open.spotify.com/embed");
 
-})
+    // Inject iframe
+    spotifyPlayer.innerHTML = `
+      <iframe style="border-radius:12px" 
+        src="${embedLink}" 
+        width="100%" height="380" frameborder="0" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+      </iframe>
+    `;
 
-// YT functions (for Music Player)
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-player', {
-        height: '200',
-        width: '100%',
-        playerVars: {
-            listType: 'playlist',
-            list: ''
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    })
-}
+    playlistInputBox.style.display = "none";
+    playerDisplay.style.display = "block";
+    document.getElementById("playlist-name").textContent = "Spotify Playlist";
+  } else {
+    alert("Please enter a valid Spotify playlist link.");
+  }
+});
 
-function onPlayerReady(event) {
-    console.log("YouTube Player ready");
-}
+resetPlayerBtn.addEventListener("click", () => {
+  spotifyPlayer.innerHTML = "";
+  playerDisplay.style.display = "none";
+  playlistInputBox.style.display = "block";
+  playlistInput.value = "";
+});
 
-function onPlayerStateChange(event) {
+// // YT functions (for Music Player)
+// function onYouTubeIframeAPIReady() {
+//     player = new YT.Player('youtube-player', {
+//         height: '200',
+//         width: '100%',
+//         events: {
+//             'onReady': onPlayerReady,
+//             'onStateChange': onPlayerStateChange
+//         }
+//     });
+// }
 
-}
+// function onPlayerReady(event) {
+//     console.log("YouTube Player ready");
+// }
+
+// function onPlayerStateChange(event) {
+
+// }
 
 // Initial display
 updateDisplay();
